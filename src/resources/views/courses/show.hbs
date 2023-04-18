@@ -1,0 +1,42 @@
+<style>
+    
+.btn-text {
+    background-color: #f47425;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 11.7px;
+    border: 1px solid hsl(27, 90%, 55%);
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition-duration: .7s;
+    font-weight: bold;
+}
+
+.btn-text:hover {
+    background-color: #000;
+    color: #f47425;
+    border: 1px solid hsl(27, 90%, 55%);
+    transition-duration: .7s;
+}
+
+</style>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <iframe style="width: 100%; height: 30.25vw" src="https://www.youtube.com/embed/{{course.videoId}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <h2 style="padding-bottom: 17px;">TRAILER khóa học {{course.name}}</h2>
+        <div class="row" style="padding-bottom: 50px;">
+            <div class="col-lg-9 col-md-12 col-sm-12">
+                <h3>{{course.description}}</h3>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                <button class="btn-text">Mua khóa học</button>
+            </div>
+        </div>
+        
+    </div>
+</div>

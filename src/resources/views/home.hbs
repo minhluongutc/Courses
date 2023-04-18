@@ -1,0 +1,44 @@
+<style>
+    .btn-text {
+    background-color: #f47425;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 11.7px;
+    border: 1px solid hsl(27, 90%, 55%);
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition-duration: .7s;
+    font-weight: bold;
+}
+
+.btn-text:hover {
+    background-color: #000;
+    color: #f47425;
+    border: 1px solid hsl(27, 90%, 55%);
+    transition-duration: .7s;
+}
+</style>
+
+<div class="mt-4">
+    <div class="row">
+        {{#each courses}}
+            <div class="col-sm-6 col-lg-4">
+                <div class="card card-course-item">
+                    <a href="/courses/{{this.slug}}">
+                        <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+                    </a>
+                    <div class="card-body">
+                    <a href="/courses/{{this.slug}}">
+                        <h5 class="card-title">{{this.name}}</h5>
+                    </a>
+                        <p class="card-text">{{this.description}}</p>
+                        <a style="text-decoration: none;" href="#" class="btn-text">Mua khóa học</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div> 

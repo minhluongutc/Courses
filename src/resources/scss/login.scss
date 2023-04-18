@@ -1,0 +1,76 @@
+.app-container-login {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-account {
+    width: 672px;
+}
+
+.modal-login {
+    padding: 32px
+    
+}
+
+.login-text {
+    font-weight: 400;
+    padding-bottom: 20px;
+}
+
+.input-email,
+.input-password {
+    width: 100%;
+    padding: 14.2px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition-duration: .8s;
+}
+
+.input-email:focus,
+.input-password:focus {
+    transition-duration: .8s;
+    border: 1px solid #000;
+}
+
+.input-email {
+    margin-top: 17px;
+}
+
+.input-password {
+    margin-top: 17px;
+    margin-bottom: 24px;
+}
+
+.btn-text {
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 11.7px;
+    border: 1px solid #000;
+    text-decoration: none;
+    font-size: 12px;
+    color: #000;
+    cursor: pointer;
+    transition-duration: .7s;
+}
+
+.btn-text:hover {
+    background-color: #000;
+    color: #fff;
+    transition-duration: .7s;
+}
+
+.modal-forgot {
+    margin: 20px 0 50px;
+    display: block;
+    font-size: 12px;
+    text-decoration: none;
+    color: #000;
+}
+
+.already-btn {
+    margin-top: 66px;
+}
