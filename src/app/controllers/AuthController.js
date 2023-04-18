@@ -3,6 +3,7 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 const Account = require('../models/Account');
 const bcrypt = require('bcryptjs')
+const { mutipleMongooseToObject } = require("../../util/mongoose");
 
 let refreshTokens = []
 let loggedInUser = null;
@@ -115,7 +116,7 @@ class AuthController {
 
           //res.cookie('loggedInUser', loggedInUser, { maxAge:   900000, httpOnly: true });
           loggedInUser = { username: req.body.username, role: user.role };
-          return res.render("home", { loggedInUser: loggedInUser });
+          res.render("home", { loggedInUser: loggedInUser });
         } catch (error) {
           console.log(error);
           return res.status(500).json({ error: "Internal Server Error" });

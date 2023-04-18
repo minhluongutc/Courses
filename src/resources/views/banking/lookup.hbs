@@ -1,0 +1,19 @@
+<div class="app-container-login">
+    <form method="POST" class="modal-account" action="/banking/lookup" >
+        <div class="modal-login">
+            <div class="modal-input">
+                <input type="text" class="input-email c-12 m-12 l-12" name="bin" id="bin" placeholder="MÃ BIN">
+                <input type="text" class="input-password  c-12 m-12 l-12" name="accountNumber" id="accountNumber" placeholder="SỐ TÀI KHOẢN">
+                {{!-- {{#if result}}
+                <input disabled type="text" class="input-password  c-12 m-12 l-12" name="accountName" id="accountName" placeholder="{{result.accountName}}">
+                {{else}}
+                {{/if}} 
+                <input disabled type="text" class="input-password  c-12 m-12 l-12" name="accountName" id="accountName" placeholder="TÊN CHỦ TÀI KHOẢN">--}}
+               <p>{{result}}</p> 
+            </div>
+            <div class="sign-in__btn modal-btn">
+                <button  class="btn-text">NHẬP</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -6,12 +6,11 @@ const coursesRouter = require('./courses');
 const siteRouter = require('./site');
 const learningRouter = require('./learning');
 const userRouter = require('./user');
-
-const checkUser = require('../app/middlewares/CheckUser');
-const checkLogin = require('../app/middlewares/CheckLogin');
+const bankingRouter = require('./banking');
 
 function route(app) {
     app.use('/learning', learningRouter);
+    app.use('/banking', bankingRouter);
     app.use('/news', newsRouter);
     app.use('/home', homeRouter);
     app.use('/auth', authRouter);
