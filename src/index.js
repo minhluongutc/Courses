@@ -43,10 +43,15 @@ app.use(SortMiddleware)
 //app.use(morgan('combined'))
 
 // Template engine
+
 app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
+        runtimeOptions: {
+            allowProtoMethodsByDefault: true,
+            allowProtoPropertiesByDefault: true,
+        },
         helpers: {
             sum: (a, b) => a + b,
             sortable: (field, sort) => {
