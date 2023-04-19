@@ -1,48 +1,55 @@
 <style>
-    .btn-text {
-    background-color: #f47425;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 11.7px;
-    border: 1px solid hsl(27, 90%, 55%);
-    text-decoration: none;
-    font-size: 20px;
-    color: #fff;
-    cursor: pointer;
-    transition-duration: .7s;
-    font-weight: bold;
-    
-}
-.btn-text-new:hover::before {
-    content: attr(data-price);
-}
-.btn-text-new::before {
-    content: "Mua khóa học";
-}
+    .btn-text { background-color: #f47425; width: 100%; display: flex;
+    justify-content: center; padding: 11.7px; border: 1px solid hsl(27, 90%,
+    55%); text-decoration: none; font-size: 20px; color: #fff; cursor: pointer;
+    transition-duration: .7s; font-weight: bold; } .btn-text-new:hover::before {
+    content: attr(data-price); } .btn-text-new::before { content: "Mua khóa
+    học"; }
 </style>
 
-<div class="mt-4">
-    <div class="row">
+<div class='mt-4'>
+    <div class='row'>
         {{#each courses}}
-            <div class="col-sm-6 col-lg-4">
-                <div class="card card-course-item">
-                    <a href="/courses/{{this.slug}}">
-                        <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+            <div class='col-sm-6 col-lg-4'>
+                <div class='card card-course-item'>
+                    <a href='/courses/{{this.slug}}'>
+                        <img
+                            class='card-img-top'
+                            src='{{this.image}}'
+                            alt='{{this.name}}'
+                        />
                     </a>
-                    <div class="card-body">
-                    <a href="/courses/{{this.slug}}">
-                        <h5 class="card-title">{{this.name}}</h5>
-                    </a>
-                        <p class="card-text">{{this.description}}</p>
-                        <form method="POST" action="/banking/generateForCourse" >
-                            <input value="Thanh toán khóa học {{this.name}}" type="text" class="input-email  c-12 m-12 l-12" name="addInfo" id="addInfo" style="display: none;">
-                            <input value="{{this.price}}" type="text" class="input-email  c-12 m-12 l-12" name="amount" id="amount" style="display: none;">
-                            <button style="text-decoration: none;"class="btn-text btn-text-new" data-price="{{this.price}} vnđ"></button>
+                    <div class='card-body'>
+                        <a href='/courses/{{this.slug}}'>
+                            <h5 class='card-title'>{{this.name}}</h5>
+                        </a>
+                        <p class='card-text'>{{this.description}}</p>
+                        <form method='POST' action='/banking/generateForCourse'>
+                            <input
+                                value='Thanh toán khóa học {{this.name}}'
+                                type='text'
+                                class='input-email c-12 m-12 l-12'
+                                name='addInfo'
+                                id='addInfo'
+                                style='display: none;'
+                            />
+                            <input
+                                value='{{this.price}}'
+                                type='text'
+                                class='input-email c-12 m-12 l-12'
+                                name='amount'
+                                id='amount'
+                                style='display: none;'
+                            />
+                            <button
+                                style='text-decoration: none;'
+                                class='btn-text btn-text-new'
+                                data-price='{{this.price}} vnđ'
+                            ></button>
                         </form>
                     </div>
                 </div>
             </div>
         {{/each}}
     </div>
-</div> 
+</div>

@@ -1,15 +1,24 @@
-<div class="mt-4">
+<div class='mt-4'>
     <h3>Update user</h3>
-    <form class="mt-4" method="POST" action="/user/{{account._id}}?_method=PUT">
-        <div class="form-group">
-            <label for="name">Username:</label>
-            <input  class="form-control" value="{{account.username}}" id="username" name="username">
+    <form class='mt-4' method='POST' action='/user/{{account._id}}?_method=PUT'>
+        <div class='form-group'>
+            <label for='name'>Username:</label>
+            <input
+                class='form-control'
+                value='{{account.username}}'
+                id='username'
+                name='username'
+            />
         </div>
-        <div class="form-group">
-            <label for="description">Role:</label>
-            <textarea  class="form-control" id="role" name="role">{{account.role}}</textarea>
+        <div class='form-group'>
+            <label for='description'>Role:</label>
+            <textarea
+                class='form-control'
+                id='role'
+                name='role'
+            >{{account.role}}</textarea>
         </div>
-        
-        <button type="submit" class="btn btn-primary">Lưu Lại</button>
+
+        <button type='submit' class='btn btn-primary'>Lưu Lại</button>
     </form>
 </div>
