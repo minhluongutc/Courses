@@ -9,4 +9,9 @@ router.post('/lookup', bankingController.lookup);
 router.get('/generate', bankingController.showGenerateQrCode);
 router.post('/generate', bankingController.generateQrCode);
 
+
+router.post('/generateForCourse', bankingController.generateQrCodeForCourse);
+
+
+
 module.exports = router;

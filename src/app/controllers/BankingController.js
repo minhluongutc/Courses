@@ -1,5 +1,6 @@
 const VietQR = require( 'vietqr');
 const axios = require('axios')
+const Course = require('../models/Course')
 const readline = require('readline');
 const { render } = require('node-sass');
 
@@ -88,7 +89,6 @@ class BankingController {
         };
     
         const response = await axios.post('https://api.vietqr.io/v2/generate', data, config);
-        
         res.render('banking/QrCode', { data: response.data })
       } catch (error) {
         res.status(500).json({ error: error.message });
