@@ -63,10 +63,19 @@
     </div>
 </nav>
 <script>
-    const logoutButton = document.getElementById('logout-button')
-    logoutButton.addEventListener('click', async () => { try { const response =
-    await fetch('/auth/logout', { method: 'POST', credentials: 'include' })
-    const data = await response.json() console.log(data) // "Logged out !" //
-    redirect to login page or update UI window.location.href = "/auth/login" }
-    catch (error) { console.error(error) } })
+  const logoutButton = document.getElementById('logout-button')
+logoutButton.addEventListener('click', async () => {
+  try {
+    const response = await fetch('/auth/logout', {
+      method: 'POST',
+      credentials: 'include'
+    })
+    const data = await response.json()
+    console.log(data) // "Logged out !"
+    // redirect to login page or update UI
+    window.location.href = "/auth/login"
+  } catch (error) {
+    console.error(error)
+  }
+})
 </script>
