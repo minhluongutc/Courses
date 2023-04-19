@@ -1,0 +1,20 @@
+<div class="app-container-login">
+    <form method="POST" class="modal-account" action="/banking/generate" >
+        <div class="modal-login">
+            <div class="modal-input">
+                <input type="text" class="input-email c-12 m-12 l-12" name="accountNo" id="accountNo" placeholder="SỐ TÀI KHOẢN">
+                <input type="text" class="input-email  c-12 m-12 l-12" name="accountName" id="accountName" placeholder="TÊN CHỦ TÀI KHOẢN">
+                <input type="text" class="input-email  c-12 m-12 l-12" name="acqId" id="acqId" placeholder="MÃ BIN">
+                <input type="text" class="input-email  c-12 m-12 l-12" name="addInfo" id="addInfo" placeholder="NỘI DUNG CHUYỂN KHOẢN">
+                <input type="text" class="input-email  c-12 m-12 l-12" name="amount" id="amount" placeholder="SỐ TIỀN CHUYỂN (VNĐ)">
+                <input type="text" class="input-email  c-12 m-12 l-12" name="template" id="template" placeholder="ĐỊNH DẠNG">
+                
+               <p>{{result}}</p> 
+            </div>
+            <div class="sign-in__btn modal-btn">
+                <button  class="btn-text">NHẬP</button>
+            </div>
+        </div>
+    </form>
+</div>
+{{!-- <img src="{{data.data.qrDataURL}}" alt=""> --}}

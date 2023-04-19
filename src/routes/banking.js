@@ -3,7 +3,10 @@ const router = express.Router();
 
 const bankingController = require('../app/controllers/BankingController');
 
-router.get('/', bankingController.show);
+router.get('/', bankingController.showLookUp);
 router.post('/lookup', bankingController.lookup);
+
+router.get('/generate', bankingController.showGenerateQrCode);
+router.post('/generate', bankingController.generateQrCode);
 
 module.exports = router;

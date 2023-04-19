@@ -1,10 +1,11 @@
 const VietQR = require( 'vietqr');
 const axios = require('axios')
 const readline = require('readline');
+const { render } = require('node-sass');
 
 class BankingController {
 
-    show(req, res ) {
+    showLookUp(req, res ) {
         res.render('banking/lookup')
     }
     
@@ -38,8 +39,61 @@ class BankingController {
           res.status(500).json({ message: 'Server error' });
         }
     }
-    
 
+    showGenerateQrCode (req, res) {
+      res.render('banking/generateQrCode')
+    }
+    
+    async generateQrCode (req, res) {
+      try {
+        const { accountNo, accountName, acqId, addInfo, amount, template } = req.body;
+    
+        const config = {
+          headers: {
+            'x-client-id': '<2ab01b4f-7b27-48df-8679-e1de5fbbb440>',
+            'x-api-key': '<cc035823-32a6-4dc5-ae8f-e1e16767e74b>',
+            'Content-Type': 'application/json',
+          },
+        };
+    
+        const data = { accountNo, accountName, acqId, addInfo, amount, template, };
+    
+        const response = await axios.post('https://api.vietqr.io/v2/generate', data, config);
+    
+        res.render('banking/QrCode', { data: response.data })
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
+
+    async generateQrCodeForCourse (req, res) {
+      try {
+        const { accountNo, accountName, acqId, addInfo, amount, template } = req.body;
+    
+        const config = {
+          headers: {
+            'x-client-id': '<2ab01b4f-7b27-48df-8679-e1de5fbbb440>',
+            'x-api-key': '<cc035823-32a6-4dc5-ae8f-e1e16767e74b>',
+            'Content-Type': 'application/json',
+          },
+        };
+    
+        const data = 
+        { accountNo: '0345571823', 
+          accountName: 'Nguyen Minh Luong', 
+          acqId: '970422', 
+          addInfo: 'Thanh toán khóa học', 
+          amount, 
+          template: 'compact2', 
+        };
+    
+        const response = await axios.post('https://api.vietqr.io/v2/generate', data, config);
+        
+        res.render('banking/QrCode', { data: response.data })
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
 }
 
 
