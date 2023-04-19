@@ -26,7 +26,7 @@
     <div class='row'>
         {{#each courses}}
             <div class='col-sm-6 col-lg-4'>
-                <div class='card card-course-item'>
+                <div style="display: flex; flex-direction: column;" class='card card-course-item '>
                     <a href='/courses/{{this.slug}}'>
                         <img
                             class='card-img-top'
@@ -34,7 +34,7 @@
                             alt='{{this.name}}'
                         />
                     </a>
-                    <div class='card-body'>
+                    <div style="min-height: 268px; " class='card-body'>
                         <a href='/courses/{{this.slug}}'>
                             <h5 class='card-title'>{{this.name}}</h5>
                         </a>

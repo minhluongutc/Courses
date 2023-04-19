@@ -1,4 +1,3 @@
-const newsRouter = require('./news');
 const homeRouter = require('./home');
 const authRouter = require('./auth');
 const meRouter = require('./me');
@@ -11,7 +10,6 @@ const bankingRouter = require('./banking');
 function route(app) {
     app.use('/learning', learningRouter);
     app.use('/banking', bankingRouter);
-    app.use('/news', newsRouter);
     app.use('/home', homeRouter);
     app.use('/auth', authRouter);
     app.use('/me', meRouter);

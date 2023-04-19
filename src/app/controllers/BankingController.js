@@ -6,7 +6,7 @@ const { render } = require('node-sass');
 
 class BankingController {
     showLookUp(req, res) {
-        res.render('banking/lookup');
+        res.render('banking/lookup',  { loggedInUser: req.user });
     }
 
     async lookup(req, res) {
@@ -41,7 +41,7 @@ class BankingController {
     }
 
     showGenerateQrCode(req, res) {
-        res.render('banking/generateQrCode');
+        res.render('banking/generateQrCode', { loggedInUser: req.user });
     }
 
     async generateQrCode(req, res) {
