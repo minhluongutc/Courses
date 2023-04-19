@@ -14,6 +14,10 @@ const Course = new Schema({
     deletedAt: { type: String },
     price: { type: String},
     slug: { type: String, slug: 'name', unique: true },
+    learningId: {
+        type: String,
+        ref: 'Learning'
+    }
 }, {
     timestamps: true,
 })
