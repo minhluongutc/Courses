@@ -16,6 +16,7 @@ class UserController {
         Promise.all([accountQuery, Account.countDocumentsDeleted()])
             .then(([accounts, deletedCount]) => 
                 res.render('user/user', {
+                    loggedInUser: req.user,
                     deletedCount,
                     accounts: mutipleMongooseToObject(accounts),
                 })

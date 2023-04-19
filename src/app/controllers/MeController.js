@@ -16,6 +16,7 @@ class MeController {
         Promise.all([courseQuery, Course.countDocumentsDeleted()])
             .then(([courses, deletedCount]) => 
                 res.render('me/stored-courses', {
+                    loggedInUser: req.user,
                     deletedCount,
                     courses: mutipleMongooseToObject(courses),
                 })
