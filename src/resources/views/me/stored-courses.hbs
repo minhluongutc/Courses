@@ -36,6 +36,10 @@
                   Thời gian tạo
                   {{{sortable 'createdAt' _sort}}}
                 </th>
+                <th scope="col" colspan="2">
+                  Giá
+                  {{{sortable 'price' _sort}}}
+                </th>
             </tr>
         </thead>
 
@@ -51,6 +55,8 @@
               <td>{{this.name}}</td>
               <td>{{this.level}}</td>
               <td>{{this.createdAt}}</td>
+              <td></td>
+              <td>{{this.price}}</td>
               <td>
                   <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
                   <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course-modal">Xóa</a>

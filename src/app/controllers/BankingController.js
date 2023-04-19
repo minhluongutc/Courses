@@ -83,7 +83,7 @@ class BankingController {
         { accountNo: '0345571823', 
           accountName: 'Nguyen Minh Luong', 
           acqId: '970422', 
-          addInfo: 'Thanh toán khóa học', 
+          addInfo, 
           amount, 
           template: 'compact2', 
         };

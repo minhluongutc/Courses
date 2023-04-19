@@ -22,6 +22,13 @@
     transition-duration: .7s;
 }
 
+.btn-text-new:hover::before {
+    content: attr(data-price);
+}
+.btn-text-new::before {
+    content: "Mua khóa học";
+}
+
 </style>
 
 
@@ -34,9 +41,13 @@
                 <h3>{{course.description}}</h3>
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12">
-                <button class="btn-text">Mua khóa học</button>
+                <form method="POST" action="/banking/generateForCourse" >
+                    
+                    <input value="Thanh toán khóa học {{course.name}}" type="text" class="input-email  c-12 m-12 l-12" name="addInfo" id="addInfo" style="display: none;">
+                    <input value="{{course.price}}" type="text" class="input-email  c-12 m-12 l-12" name="amount" id="amount" style="display: none;">
+                    <button style="text-decoration: none;"class="btn-text btn-text-new" data-price="{{course.price}} vnđ"></button>
+                </form>
             </div>
         </div>
-        
     </div>
 </div>
