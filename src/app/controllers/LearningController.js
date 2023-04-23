@@ -20,7 +20,11 @@ class LearningController {
                 if (err) {
                     return next(err);
                 }
-                res.render('learning/show', { course });
+                // console.log(course.learningId.unitId[0].exampleId[0].time)
+                // res.status(200).json(course)
+                res.render('learning/show', { 
+                    course, 
+                    loggedInUser: req.user });
             });
     }
 }

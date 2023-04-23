@@ -32,6 +32,7 @@ class UserController {
         Account.findById(req.params.id)
             .then((account) =>
                 res.render('user/edit', {
+                    loggedInUser: req.user,
                     account: mongooseToObject(account),
                 }),
             )
@@ -69,6 +70,7 @@ class UserController {
         Promise.all([accountQuery, Account.countDocumentsDeleted()])
             .then(([accounts, deletedCount]) =>
                 res.render('user/user', {
+                    loggedInUser: req.user,
                     deletedCount,
                     accounts: mutipleMongooseToObject(accounts),
                 }),

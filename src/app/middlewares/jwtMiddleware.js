@@ -8,9 +8,9 @@ class JwtMiddleware {
             const accessToken = req.cookies.refreshToken;
             if (accessToken) {
                 const payload = jwt.decode(accessToken);
-                const user = await Account.findOne({ id: payload.id });
-                // const loggedInUser = { username: req.body.username, role: user.role };
+                const user = await Account.findById( payload.id );
                 req.user = user;
+                //console.log(user)
                 next();
             } else {
                 res.status(401).json('You are not authenticated');
@@ -20,15 +20,26 @@ class JwtMiddleware {
         }
     }
 
-    // Delete user
+    // check admin
     async verifyTokenAndAdminAuth(req, res, next) {
-        jwtMiddleware.verifyToken(req, res, () => {
-            if (req.user.id == req.params.id || req.user.role == 'admin') {
-                next();
+        try {
+            const accessToken = req.cookies.refreshToken;
+            if (accessToken) {
+                const payload = jwt.decode(accessToken);
+                const user = await Account.findById( payload.id );
+                req.user = user;
+                if(user.role == 'vip' || user.role == 'admin') {
+                    next();
+                } else {
+                    res.status(401).json('You are not authenticated');
+                }
+                //console.log(user)
             } else {
-                res.status(403).json('You a not allowed to delete other');
+                res.status(401).json('You are not authenticated');
             }
-        });
+        } catch (error) {
+            res.status(403).json('Token is not valid');
+        }
     }
 }
 

@@ -4,6 +4,6 @@ const router = express.Router();
 const jwtMiddleware = require('../app/middlewares/jwtMiddleware');
 const learningController = require('../app/controllers/LearningController');
 
-router.get('/:id', learningController.show);
+router.get('/:id', jwtMiddleware.verifyTokenAndAdminAuth, learningController.show);
 
 module.exports = router;

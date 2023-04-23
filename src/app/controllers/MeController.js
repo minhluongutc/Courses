@@ -28,6 +28,7 @@ class MeController {
         Course.findDeleted({})
             .then((courses) =>
                 res.render('me/trash-courses', {
+                    loggedInUser: req.user,
                     courses: mutipleMongooseToObject(courses),
                 }),
             )

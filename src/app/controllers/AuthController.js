@@ -66,10 +66,7 @@ class AuthController {
     async loginUser(req, res) {
         try {
             const user = await Account.findOne({ username: req.body.username });
-            console.log(
-                '🚀 ~ file: AuthController.js:68 ~ AuthController ~ loginUser ~ user:',
-                user,
-            );
+            
             if (!user) {
                 const error = 'Wrong username!';
                 return res.redirect(`/auth/login?error=${error}`);
@@ -109,10 +106,6 @@ class AuthController {
             });
 
             const { password, ...others } = user._doc;
-            console.log(
-                '🚀 ~ file: AuthController.js:108 ~ AuthController ~ loginUser ~ password:',
-                password,
-            );
 
             //res.cookie('loggedInUser', loggedInUser, { maxAge:   900000, httpOnly: true });
             loggedInUser = { username: req.body.username, role: user.role };

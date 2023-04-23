@@ -6,8 +6,9 @@ class CourseController {
     show(req, res, next) {
         Course.findOne({ slug: req.params.slug })
             .then((course) => {
-                res.render('courses/show', {
-                    course: mongooseToObject(course),
+                res.render('courses/show', { 
+                    course: mongooseToObject(course), 
+                    loggedInUser: req.user
                 });
             })
             .catch(next);
@@ -33,6 +34,7 @@ class CourseController {
         Course.findById(req.params.id)
             .then((course) =>
                 res.render('courses/edit', {
+                    loggedInUser: req.user,
                     course: mongooseToObject(course),
                 }),
             )

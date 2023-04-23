@@ -22,8 +22,8 @@
 .sidenav a, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 20px;
-  color: #818181;
+  font-size: 14px;
+  color: #e0e0e1;
   display: block;
   border: none;
   background: none;
@@ -31,10 +31,12 @@
   text-align: left;
   cursor: pointer;
   outline: none;
+  font-weight: bold;
 }
 /* On mouse-over */
 .sidenav a:hover, .dropdown-btn:hover {
   color: #f1f1f1;
+  background-color: #32353b;
 }
 /* Main content */
 .main {
@@ -43,14 +45,13 @@
 }
 /* Add an active class to the active dropdown button */
 .active {
-  background-color: green;
+  background-color: #272a31;
   color: white;
 }
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
   display: none;
-  background-color: #262626;
-  padding-left: 8px;
+  background-color: #191d1e;
 }
 /* Optional: Style the caret down icon */
 .fa-caret-down {
@@ -72,6 +73,17 @@ body {
   background-color: #262626;
   {{!-- background-color: #111; --}}
 }
+
+.bg{
+  background-color: #272a31;
+  height: 67px;
+  font-size: 17px;!important
+ 
+}
+
+button:focus {
+  outline: none;
+}
 </style>
 
 <div class='mt-4'>
@@ -90,38 +102,44 @@ body {
         </div>
         <div class='col-lg-3 col-md-12 col-sm-12' style='padding-left: 0'>
             <div class='sidenav'>
-                {{! <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#clients">Clients</a>}}
-                <h3
-                    style='text-align: center;'
-                    class='heading'
-                >{{course.learningId.nameCourse}}</h3>
+                <h3 style='text-align: center;'
+                    class='heading' >
+                    {{course.learningId.nameCourse}}
+                </h3>
                 {{#each course.learningId.unitId}}
-                    <button class='dropdown-btn'>{{this.unitName}}
+                    <button style=" border-bottom: 1px solid #181d1e;" class='dropdown-btn bg'>{{this.unitName}}
                         <i class='fa fa-caret-down'></i>
                     </button>
                     <div class='dropdown-container'>
                         {{#each this.exampleId}}
-                            <a href='#'>{{this.exName}}</a>
+                            <a class="example" style="padding-left: 25px; border-bottom: 1px solid #000;" href='#'>{{this.exName}}</a>
                         {{/each}}
                     </div>
                 {{/each}}
-
-                {{!  <button class="dropdown-btn">Chương 2
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="#">Bài 5</a>
-                    <a href="#">Bài 6</a>
-                    <a href="#">Bài 7</a>
-                </div> }}
             </div>
         </div>
     </div>
 </div>
-
 <script>
+  const $ = document.querySelector.bind(document)
+  const $$ = document.querySelectorAll.bind(document)
+
+  const check = $('.example.active')
+  const examples = $$('.example')
+console.log(check)
+  examples.forEach((example, index) => {
+    example.onclick = function () {
+      if(check != null) {
+        $('.example.active').classList.remove('active')
+        
+      } else {
+      }
+
+      this.classList.add('active')
+    }
+  })
+
+
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;

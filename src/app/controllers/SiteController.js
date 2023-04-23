@@ -13,10 +13,6 @@ class SiteController {
             })
             .catch((error) => next(error));
     }
-
-    search(req, res) {
-        res.render('search');
-    }
 }
 
 module.exports = new SiteController();
