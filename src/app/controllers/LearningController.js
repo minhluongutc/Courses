@@ -17,14 +17,15 @@ class LearningController {
                 },
             })
             .exec((err, course) => {
-                if (err) {
-                    return next(err);
-                }
-                // console.log(course.learningId.unitId[0].exampleId[0].time)
-                // res.status(200).json(course)
-                res.render('learning/show', { 
-                    course, 
-                    loggedInUser: req.user });
+              if (err) {
+                return next(err);
+              }
+              // console.log(course.learningId.unitId[0].exampleId[0].time)
+              // res.status(200).json(course)
+              res.render("learning/show", {
+                course,
+                loggedInUser: req.user,
+              });
             });
     }
 }

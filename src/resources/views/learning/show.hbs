@@ -89,8 +89,9 @@ button:focus {
 <div class='mt-4'>
     <div class='row'>
         <div class='col-lg-9 col-md-12 col-sm-12'>
-            <div class='main'>
+            <div id="main" class='main'>
                 <iframe
+                    id = "supper-view"
                     style='width: 100%; height: 30.25vw;'
                     src='https://www.youtube.com/embed/{{course.videoId}}'
                     title='YouTube video player'
@@ -112,7 +113,7 @@ button:focus {
                     </button>
                     <div class='dropdown-container'>
                         {{#each this.exampleId}}
-                            <a class="example" style="padding-left: 25px; border-bottom: 1px solid #000;" href='#'>{{this.exName}}</a>
+                            <a id="{{this._id}}" class="example" style="padding-left: 25px; border-bottom: 1px solid #000;" href='#' onclick="supperClick(`{{this}}`)">{{this.exName}}</a>
                         {{/each}}
                     </div>
                 {{/each}}
@@ -124,17 +125,35 @@ button:focus {
   const $ = document.querySelector.bind(document)
   const $$ = document.querySelectorAll.bind(document)
 
-  const check = $('.example.active')
+ /* const check = $('.example.active')
   const examples = $$('.example')
 console.log(check)
   examples.forEach((example, index) => {
     example.onclick = function () {
-        $('.example.active').classList.remove('active')
-        $('.example.active').classList.add('active')
-
       this.classList.add('active')
     }
-  })
+  })*/
+
+  const supperClick = (example) => {
+    const preData = example.split(',')
+    const length = preData.length
+    const videoId =preData[length-1].split(`'`)[1]
+
+    const main = document.getElementById('main');
+    const view = document.getElementById('supper-view');
+    main.removeChild(view);
+    main.innerHTML = `<iframe
+                    id = "supper-view"
+                    style='width: 100%; height: 30.25vw;'
+                    src='https://www.youtube.com/embed/${videoId}'
+                    title='YouTube video player'
+                    frameborder='0'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                    allowfullscreen
+                ></iframe>`
+
+ 
+  }
 
 
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

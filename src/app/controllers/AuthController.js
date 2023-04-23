@@ -16,20 +16,20 @@ class AuthController {
     async registerUser(req, res) {
         res.render('register');
         try {
-            const salt = await bcrypt.genSalt(10);
-            const hashed = await bcrypt.hash(req.body.password, salt);
+          const salt = await bcrypt.genSalt(10);
+          const hashed = await bcrypt.hash(req.body.password, salt);
 
-            //Create new user
-            const newUser = await new Account({
-                username: req.body.username,
-                password: hashed,
-            });
+          //Create new user
+          const newUser = await new Account({
+            username: req.body.username,
+            password: hashed,
+          });
 
-            //Save to DB
-            const user = await newUser.save();
-            res.status(200).json(user);
-        } catch {
-            res.status(500).json(err);
+          //Save to DB
+          const user = await newUser.save();
+          res.status(200).json(user);
+        } catch (err) {
+          res.status(500).json(err);
         }
     }
 
