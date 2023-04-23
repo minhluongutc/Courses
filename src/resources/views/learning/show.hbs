@@ -129,11 +129,8 @@ button:focus {
 console.log(check)
   examples.forEach((example, index) => {
     example.onclick = function () {
-      if(check != null) {
         $('.example.active').classList.remove('active')
-        
-      } else {
-      }
+        $('.example.active').classList.add('active')
 
       this.classList.add('active')
     }
