@@ -125,20 +125,11 @@ button:focus {
   const $ = document.querySelector.bind(document)
   const $$ = document.querySelectorAll.bind(document)
 
- /* const check = $('.example.active')
-  const examples = $$('.example')
-console.log(check)
-  examples.forEach((example, index) => {
-    example.onclick = function () {
-      this.classList.add('active')
-    }
-  })*/
-
   const supperClick = (example) => {
     const preData = example.split(',')
     const length = preData.length
     const videoId =preData[length-1].split(`'`)[1]
-
+    console.log(preData, length, videoId)
     const main = document.getElementById('main');
     const view = document.getElementById('supper-view');
     main.removeChild(view);

@@ -11,7 +11,7 @@ const AccountSchema = new Schema(
         role: { type: String, default: 'user' },
     },
     {
-        //collection: 'Account',
+        collection: 'accounts',
         timestamps: true,
     },
 );

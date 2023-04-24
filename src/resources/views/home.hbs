@@ -68,3 +68,28 @@
         {{/each}}
     </div>
 </div>
+<div class="pagination">
+  {{#if showPrev}}
+    <a href="{{prevLink}}">Prev</a>
+  {{/if}}
+  {{#each pages}}
+    {{#if this.isActive}}
+      <span class="active">{{this.pageNum}}</span>
+    {{else}}
+      <a href="{{this.link}}">{{this.pageNum}}</a>
+    {{/if}}
+  {{/each}}
+  {{#if showNext}}
+    <a href="{{nextLink}}">Next</a>
+  {{/if}}
+</div>
+
+
+
+
+
+
+
+
+
+

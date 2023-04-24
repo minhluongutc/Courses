@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
 const mongooseDelete = require('mongoose-delete');
+const paginate = require('mongoose-paginate-v2');
+
 
 const Schema = mongoose.Schema;
 
@@ -31,5 +33,6 @@ Course.plugin(mongooseDelete, {
     deleteAt: true,
     overrideMethods: 'all',
 });
+Course.plugin(paginate);
 
 module.exports = mongoose.model('Course', Course);
