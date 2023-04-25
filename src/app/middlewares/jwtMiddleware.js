@@ -10,7 +10,7 @@ class JwtMiddleware {
                 const payload = jwt.decode(accessToken);
                 const user = await Account.findById( payload.id );
                 req.user = user;
-                //console.log(user)
+                //console.log(user._id)
                 next();
             } else {
                 res.status(401).json('You are not authenticated');

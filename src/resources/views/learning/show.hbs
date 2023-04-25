@@ -99,7 +99,16 @@ button:focus {
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     allowfullscreen
                 ></iframe>
+              <h1 id="exampleName" style="color: #fff; font-size: 28px;">Giới thiệu khóa học</h1>
             </div>
+              <h1 style="color: #fff; font-size: 18px;">Comments</h1>
+              <ul id="comments-list" style="color: #fff"></ul>
+              <form  id="comment-form"  style="display: grid;">
+                <input type="text" name="accountId" value="{{loggedInUser.username}}" style="display: none;">
+                <input type="text" name="exampleId" id="exampleId" style="display: none;">
+                <textarea name="content" placeholder="Comment"></textarea>
+                <button type="submit">Add Comment</button>
+              </form>
         </div>
         <div class='col-lg-3 col-md-12 col-sm-12' style='padding-left: 0'>
             <div class='sidenav'>
@@ -122,16 +131,80 @@ button:focus {
     </div>
 </div>
 <script>
+  const commentsList = document.getElementById('comments-list');
+  const commentForm = document.getElementById('comment-form');
+
+  // Lấy danh sách bình luận và hiển thị trên trang
+  fetch('http://localhost:3000/comment')
+    .then(response => response.json())
+    .then(comments => {
+      comments.forEach(comment => {
+        const li = document.createElement('li');
+        li.innerText = `${comment.accountId}: ${comment.content}`;
+        commentsList.appendChild(li);
+      });
+    });
+  // Thêm bình luận mới khi người dùng nhấn submit
+commentForm.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const accountIdInput = commentForm.elements['accountId'];
+  const exampleIdInput = commentForm.elements['exampleId'];
+  const contentInput = commentForm.elements['content'];
+
+  fetch('http://localhost:3000/comment', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      accountId: accountIdInput.value,
+      exampleId: exampleIdInput.value,
+      content: contentInput.value
+    })
+  })
+    .then(response => response.json())
+    .then(comment => {
+      const li = document.createElement('li');
+      li.innerText = `${comment.accountId}: ${comment.content}`;
+      commentsList.appendChild(li);
+
+      contentInput.value = '';
+    });
+});
+
+  
+</script>
+<script>
   const $ = document.querySelector.bind(document)
   const $$ = document.querySelectorAll.bind(document)
+
+  const loadPage = (example) => {
+    const preData = example.split(',')
+    const length = preData.length
+    const _id =preData[length-4].split(`'`)[0]
+    console.log(_id)
+    const commentForm = document.getElementById('comment-form');
+    const exampleId = document.getElementById('exampleId');
+    commentForm.removeChild(exampleId);
+    commentForm.innerHTML = `
+                        <input type="text" name="exampleId" id="exampleId" value="${_id}">
+    `
+  }
 
   const supperClick = (example) => {
     const preData = example.split(',')
     const length = preData.length
     const videoId =preData[length-1].split(`'`)[1]
-    console.log(preData, length, videoId)
+    const exName =preData[length-3].split(`'`)[1]
+    const exampleId =preData[length-4].split(`'`)[0].substring(23, 47)
+    console.log(exampleId)
+    //const exampleId = example._id
+
     const main = document.getElementById('main');
     const view = document.getElementById('supper-view');
+
+
     main.removeChild(view);
     main.innerHTML = `<iframe
                     id = "supper-view"
@@ -141,9 +214,11 @@ button:focus {
                     frameborder='0'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     allowfullscreen
-                ></iframe>`
+                ></iframe>
+                <h1 id="exampleName" style="color: #fff; font-size: 28px;">${exName}</h1>
+                `
 
- 
+    document.getElementById("exampleId").value = exampleId;
   }
 
 

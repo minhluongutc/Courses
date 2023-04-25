@@ -6,6 +6,6 @@ const EnrollmentMiddleware = require('../app/middlewares/EnrollmentMiddleware');
 const learningController = require('../app/controllers/LearningController');
 
 //router.get('/:id', jwtMiddleware.verifyTokenAndAdminAuth, learningController.show);
-router.get('/:id', EnrollmentMiddleware.constructor.checkEnrollmentMiddleware, learningController.show);
+router.get('/:id', jwtMiddleware.verifyToken, EnrollmentMiddleware.constructor.checkEnrollmentMiddleware, learningController.show);
 
 module.exports = router;

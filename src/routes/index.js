@@ -6,9 +6,11 @@ const siteRouter = require('./site');
 const learningRouter = require('./learning');
 const userRouter = require('./user');
 const bankingRouter = require('./banking');
+const commentRouter = require('./comment');
 
 function route(app) {
     app.use('/learning', learningRouter);
+    app.use('/comment', commentRouter);
     app.use('/banking', bankingRouter);
     app.use('/home', homeRouter);
     app.use('/auth', authRouter);
