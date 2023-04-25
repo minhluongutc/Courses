@@ -1,4 +1,5 @@
 const Course = require('../models/Course');
+const Account = require('../models/Account');
 const { mongooseToObject } = require('../../util/mongoose');
 
 class CourseController {
@@ -8,7 +9,8 @@ class CourseController {
             .then((course) => {
                 res.render('courses/show', { 
                     course: mongooseToObject(course), 
-                    loggedInUser: req.user
+                    loggedInUser: req.user,
+                    //Account: Account
                 });
             })
             .catch(next);

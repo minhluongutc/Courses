@@ -6,13 +6,13 @@ const Schema = mongoose.Schema;
 
 const Enrollment = new Schema(
     {
-        account: {
-            type: Schema.Types.ObjectId,
+        accountId: {
+            type: String,
             ref: 'Account',
             required: true,
         },
-        course: {
-            type: Schema.Types.ObjectId,
+        courseId: {
+            type: String,
             ref: 'Course',
             required: true,
         },
@@ -20,9 +20,9 @@ const Enrollment = new Schema(
         progress: { type: Number, default: 0 },
     },
     {
-        collection: 'bought',
+        collection: 'enrollment',
         timestamps: true,
     },
 );
 
-module.exports = mongoose.model('Example', Example);
+module.exports = mongoose.model('Enrollment', Enrollment);

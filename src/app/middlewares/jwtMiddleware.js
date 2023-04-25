@@ -28,7 +28,7 @@ class JwtMiddleware {
                 const payload = jwt.decode(accessToken);
                 const user = await Account.findById( payload.id );
                 req.user = user;
-                if(user.role == 'vip' || user.role == 'admin') {
+                if(user.role == 'admin') {
                     next();
                 } else {
                     res.status(401).json('You are not authenticated');
