@@ -27,7 +27,7 @@ class AuthController {
 
           //Save to DB
           const user = await newUser.save();
-          res.status(200).json(user);
+          res.redirect('/auth/login')
         } catch (err) {
           res.status(500).json(err);
         }

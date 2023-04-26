@@ -18,11 +18,7 @@ router.patch(
     courseController.restore,
 );
 router.delete('/:id', jwtMiddleware.verifyToken, courseController.destroy);
-router.delete(
-    '/:id/force',
-    jwtMiddleware.verifyToken,
-    courseController.forceDestroy,
-);
+router.delete('/:id/force', jwtMiddleware.verifyToken, courseController.forceDestroy);
 router.get('/:slug', jwtMiddleware.verifyToken, courseController.show);
 
 module.exports = router;

@@ -15,12 +15,28 @@ class EnrollmentController {
 
         Promise.all([enrollmentQuery, Enrollment.countDocumentsDeleted()])
             .then(([enrollment]) =>
-                res.render('enrollment', {
+                res.render('enrollment/enrollment', {
                     loggedInUser: req.user,
                     courses: mutipleMongooseToObject(enrollment),
                 }),
             )
             .catch(next);
+    }
+
+    //[get] enrollment/create
+    create(req, res, next) {
+        res.render('enrollment/create', { loggedInUser: req.user });
+    }
+
+    //[post] enrollment/store
+    store(req, res, next) {
+        const enrollment = new Enrollment(req.body);
+        enrollment.save()
+            .then(() => res.redirect(`/enrollment`))
+            .catch((error) => {
+                console.error(error);
+                next(error);
+            });
     }
 
     search(req, res, next) {

@@ -1,6 +1,6 @@
 <form class='mt-4' name='container-form' method='POST' action='user'>
     <div>
-        <h3>Khóa học của tôi</h3>
+        <h3>Danh sách tài khoản</h3>
     </div>
 
     <div class='mt-4 d-flex align-items-center'>
@@ -62,15 +62,15 @@
             <tr>
                 <th scope='col' colspan='2'>#</th>
                 <th scope='col'>
-                    Username
+                    Tên tài khoản
                     {{{sortable 'username' _sort}}}
                 </th>
                 <th scope='col'>
-                    Role
+                    Chức vụ
                     {{{sortable 'role' _sort}}}
                 </th>
                 <th scope='col' colspan='2'>
-                    CreatedAT
+                    Thời gian tạo
                     {{{sortable 'createdAt' _sort}}}
                 </th>
             </tr>
@@ -94,6 +94,10 @@
                     <td>{{this.role}}</td>
                     <td>{{this.createdAt}}</td>
                     <td>
+                        <a
+                            href='/enrollment/create'
+                            class='btn btn-link'
+                        >Thêm khóa học</a>
                         <a
                             href='/user/{{this._id}}/edit'
                             class='btn btn-link'
@@ -172,7 +176,7 @@
             courseId = button.data('id')
         })
         btnDeleteCourse.onclick = function () {
-            deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
+            deleteForm.action = '/user/' + courseId + '?_method=DELETE'
             deleteForm.submit()
         }
         // Checkbox all changed

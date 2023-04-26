@@ -68,11 +68,11 @@
                 <th scope='col' colspan='2'>#</th>
                 <th scope='col'>
                     accountId
-                    {{{sortable 'name' _sort}}}
+                    {{{sortable 'accountId' _sort}}}
                 </th>
                 <th scope='col'>
                     Khóa học đăng kí
-                    {{{sortable 'level' _sort}}}
+                    {{{sortable 'courseId' _sort}}}
                 </th>
                 <th scope='col' colspan='2'>
                     Thời gian đăng kí
@@ -146,7 +146,7 @@
             </div>
             <div class='modal-footer'>
                 <button
-                    id='btn-delete-course'
+                    id='btn-delete-account'
                     type='button'
                     class='btn btn-danger'
                 >Xóa bỏ</button>
@@ -169,7 +169,7 @@
         var deleteForm = document.forms['delete-course-form']
         //var containerForm = document.forms['container-form']
         var containerForm = $('form[name="container-form"]')
-        var btnDeleteCourse = document.getElementById('btn-delete-course')
+        var btnDeleteCourse = document.getElementById('btn-delete-account')
         var checkboxAll = $('#checkbox-all')
         var courseItemCheckbox = $('input[name="courseIds[]"]')
         var checkAllSubmitBtn = $('.check-all-submit-btn')
@@ -179,7 +179,7 @@
             courseId = button.data('id')
         })
         btnDeleteCourse.onclick = function () {
-            deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
+            deleteForm.action = '/user/' + courseId + '?_method=DELETE'
             deleteForm.submit()
         }
         // Checkbox all changed

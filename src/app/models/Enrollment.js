@@ -16,7 +16,6 @@ const Enrollment = new Schema(
             ref: 'Course',
             required: true,
         },
-        enrolledAt: { type: Date, default: Date.now },
         progress: { type: Number, default: 0 },
     },
     {

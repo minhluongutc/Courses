@@ -44,14 +44,10 @@ class UserController {
     }
 
     // Delete user
-    async deleteUser(req, res) {
-        try {
-            //const user = await Account.findByIdAndDelete(req.params.id)
-            const user = await Account.findById(req.params.id);
-            return res.status(200).json('Delete successfully');
-        } catch (err) {
-            res.status(500).json(err);
-        }
+    async delete(req, res, next) {
+        Account.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
     }
 
     search(req, res, next) {
