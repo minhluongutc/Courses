@@ -13,6 +13,40 @@
             <span class='navbar-toggler-icon'></span>
         </button>
         {{#if loggedInUser}}
+            {{#if (eq loggedInUser.role "admin")}}
+            <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+                <ul class='navbar-nav ml-auto'>
+                    <li class='nav-item dropdown'>
+                        <a
+                            class='nav-link dropdown-toggle'
+                            href='#'
+                            id='navbarDropdown'
+                            role='button'
+                            data-toggle='dropdown'
+                            aria-haspopup='true'
+                            aria-expanded='false'
+                        >
+                            <img
+                                src='https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-1/280348934_1002333543743548_7154129552959451706_n.jpg?stp=cp0_dst-jpg_p40x40&_nc_cat=102&ccb=1-7&_nc_sid=7206a8&_nc_ohc=Ai17CyZvED4AX8OC8nQ&_nc_ht=scontent.fhan2-3.fna&oh=00_AfDlSnDEgF_jTbEbbSqWZGtSLm3sAZNTWCnLxMdwek1eKA&oe=643DCB29'
+                                alt=''
+                                class='user-avatar'
+                            />
+                            {{loggedInUser.username}}
+                        </a>
+                        <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                            <a class='dropdown-item' href='/courses/create'>Đăng khóa học</a>
+                            <a class='dropdown-item' href='/user'>Danh sách tài khoản</a>
+                            <a class='dropdown-item' href='/enrollment'>Danh sách đăng kí khóa học</a>
+                            <div class='dropdown-divider'></div>
+                            <a class='dropdown-item' href='/me/stored/courses'>Khóa học của tôi</a>
+                            <a class='dropdown-item' href='/banking/generate'>Ứng dựng QrCode</a>
+                            <div class='dropdown-divider'></div>
+                            <a id='logout-button' class='dropdown-item'>Đăng xuất</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {{else}}
             <div class='collapse navbar-collapse' id='navbarSupportedContent'>
                 <ul class='navbar-nav ml-auto'>
                     <li class='nav-item dropdown'>
@@ -36,17 +70,7 @@
                             class='dropdown-menu'
                             aria-labelledby='navbarDropdown'
                         >
-                            <a class='dropdown-item' href='/courses/create'>Đăng
-                                khóa học</a>
-                            <a class='dropdown-item' href='/user'>Danh sách tài
-                                khoản</a>
-                            <div class='dropdown-divider'></div>
-                            <a
-                                class='dropdown-item'
-                                href='/me/stored/courses'
-                            >Khóa học của tôi</a>
-                            <a class='dropdown-item' href='/banking/generate'>Ứng dựng QrCode</a>
-                            <div class='dropdown-divider'></div>
+                           
                             <a
                                 id='logout-button'
                                 class='dropdown-item'
@@ -56,6 +80,7 @@
                     </li>
                 </ul>
             </div>
+            {{/if}}
         {{else}}
 
         {{/if}}

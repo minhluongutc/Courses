@@ -1,6 +1,11 @@
-<form class='mt-4' name='container-form' method='POST' action='user'>
+<form
+    class='mt-4'
+    name='container-form'
+    method='POST'
+    action='/courses/handle-form-actions'
+>
     <div>
-        <h3>Khóa học của tôi</h3>
+        <h3>Danh sách đăng kí khóa học</h3>
     </div>
 
     <div class='mt-4 d-flex align-items-center'>
@@ -34,7 +39,7 @@
         <div class='input-group col-lg-4'>
             <form
                 method='get'
-                action='http://localhost:3000/user/search/{{username}}'
+                action='http://localhost:3000/enrollment/search/{{username}}'
                 id='search-form'
                 class='d-flex'
             >
@@ -62,22 +67,22 @@
             <tr>
                 <th scope='col' colspan='2'>#</th>
                 <th scope='col'>
-                    Username
-                    {{{sortable 'username' _sort}}}
+                    accountId
+                    {{{sortable 'name' _sort}}}
                 </th>
                 <th scope='col'>
-                    Role
-                    {{{sortable 'role' _sort}}}
+                    Khóa học đăng kí
+                    {{{sortable 'level' _sort}}}
                 </th>
                 <th scope='col' colspan='2'>
-                    CreatedAT
+                    Thời gian đăng kí
                     {{{sortable 'createdAt' _sort}}}
                 </th>
             </tr>
         </thead>
 
         <tbody>
-            {{#each accounts}}
+            {{#each courses}}
                 <tr>
                     <td>
                         <div class='form-check'>
@@ -90,12 +95,14 @@
                         </div>
                     </td>
                     <th scope='row'>{{sum @index 1}}</th>
-                    <td>{{this.username}}</td>
-                    <td>{{this.role}}</td>
-                    <td>{{this.createdAt}}</td>
+                    <td>{{this.accountId.username}}</td>
+                    <td>{{this.courseId.name}}</td>
+                    <td>{{this.enrolledAt}}</td>
+                    <td></td>
+                    <td>{{this.price}}</td>
                     <td>
                         <a
-                            href='/user/{{this._id}}/edit'
+                            href='/courses/{{this._id}}/edit'
                             class='btn btn-link'
                         >Sửa</a>
                         <a

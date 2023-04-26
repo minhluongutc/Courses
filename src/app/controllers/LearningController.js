@@ -1,10 +1,12 @@
 const Course = require('../models/Course');
-const Unit = require('../models/Unit');
+const Comment = require('../models/Comment');
 const Example = require('../models/Example');
+const Unit = require('../models/Unit');
 const Learning = require('../models/Learning');
 const { mongooseToObject } = require('../../util/mongoose');
 
 class LearningController {
+    
     show(req, res, next) {
         Course.findById(req.params.id)
             .populate({
@@ -24,7 +26,7 @@ class LearningController {
               // res.status(200).json(course)
               res.render("learning/show", {
                 course,
-                loggedInUser: req.user,
+                loggedInUser: req.user
               });
             });
     }

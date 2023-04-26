@@ -1,9 +1,10 @@
 const express = require('express');
 const Comment = require('../models/Comment');
+const Account = require('../models/Account');
 
 class CommentController {
     async show(req, res) {
-        const comments = await Comment.find();
+        const comments = await Comment.find()
         res.send(comments);
     }
 

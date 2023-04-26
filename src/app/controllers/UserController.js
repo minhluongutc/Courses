@@ -1,8 +1,5 @@
 //const { mutipleMongooseToObject } = require('../../util/mongoose')
-const {
-    mongooseToObject,
-    mutipleMongooseToObject,
-} = require('../../util/mongoose');
+const { mongooseToObject, mutipleMongooseToObject, } = require('../../util/mongoose');
 const Account = require('../models/Account');
 
 class UserController {

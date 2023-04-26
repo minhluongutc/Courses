@@ -11,17 +11,17 @@ const perPage = 3;
 class HomeController {
     // [GET] / home
     index(req, res, next) {
-        //const perPage = 10; // Số lượng tài nguyên trên mỗi trang
-        const currentPage = req.query.page || 1; // Trang hiện tại
+        //const perPage = 10;
+        const currentPage = req.query.page || 1;
         Course.paginate({}, { page: currentPage, limit: perPage })
           .then((result) => {
-            const courses = result.docs; // Danh sách các tài nguyên được phân trang
-            const pageCount = result.totalPages; // Số lượng trang tổng cộng
+            const courses = result.docs;
+            const pageCount = result.totalPages;
             res.render('home', {
-              courses: mutipleMongooseToObject(courses), // Danh sách các tài nguyên được phân trang
-              currentPage: currentPage, // Trang hiện tại
-              pageCount: pageCount, // Số lượng trang tổng cộng
-              loggedInUser: req.user, // Thông tin người dùng đăng nhập
+              courses: mutipleMongooseToObject(courses),
+              currentPage: currentPage,
+              pageCount: pageCount,
+              loggedInUser: req.user,
             });
           })
           .catch((error) => next(error));

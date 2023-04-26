@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Course = require('../models/Course');
 const Account = require('../models/Account');
-
+const mongooseDelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
 
 const Enrollment = new Schema(
@@ -24,5 +24,10 @@ const Enrollment = new Schema(
         timestamps: true,
     },
 );
+
+Enrollment.plugin(mongooseDelete, {
+    deleteAt: true,
+    overrideMethods: 'all',
+});
 
 module.exports = mongoose.model('Enrollment', Enrollment);

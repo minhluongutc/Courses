@@ -109,6 +109,7 @@ class AuthController {
 
             //res.cookie('loggedInUser', loggedInUser, { maxAge:   900000, httpOnly: true });
             loggedInUser = { username: req.body.username, role: user.role };
+            console.log(loggedInUser.role)
             res.render('home', { loggedInUser: loggedInUser });
         } catch (error) {
             console.log(error);
