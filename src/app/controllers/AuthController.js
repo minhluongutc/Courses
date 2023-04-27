@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 const Account = require('../models/Account');
+const Course = require('../models/Course');
 const bcrypt = require('bcryptjs');
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 
@@ -110,7 +111,19 @@ class AuthController {
             //res.cookie('loggedInUser', loggedInUser, { maxAge:   900000, httpOnly: true });
             loggedInUser = { username: req.body.username, role: user.role };
             console.log(loggedInUser.role);
-            res.render('home', { loggedInUser: loggedInUser });
+            Course.find({})
+            .then((courses) => {
+                //courses = courses.map(course => course.toObject())
+                res.render('home', {
+                    loggedInUser: loggedInUser,
+                    courses: mutipleMongooseToObject(courses),
+                });
+            })
+            .catch((error) => next(error));
+            // res.render('home', { 
+            //     loggedInUser: loggedInUser,
+            //     courses: mutipleMongooseToObject(courses)
+            //  });
         } catch (error) {
             console.log(error);
             return res.status(500).json({ error: 'Internal Server Error' });

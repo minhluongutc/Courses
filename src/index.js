@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const handlebars = require('express-handlebars');
-
+var session = require('express-session')
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
 
 const route = require('./routes');
@@ -25,6 +25,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }//false
+}))
+
 app.use(cors());
 
 app.use(cookieParser());
@@ -42,6 +49,60 @@ app.use(methodOverride('_method'));
 
 // Custom middlewares
 app.use(SortMiddleware);
+
+//facebook login
+var passport = require('passport')
+var FacebookStrategy = require('passport-facebook').Strategy
+app.use(passport.session())
+
+passport.serializeUser(function(user, done) {
+    done(null, user)
+})
+
+passport.deserializeUser(function(user, done) {
+    // User.findById(id, function(err, user) {
+    //     done(err, user)
+    // })
+    done(null, user)
+})
+
+app.use(passport.initialize())
+
+passport.use(new FacebookStrategy({
+    clientID: '961743685186441',
+    clientSecret: '1f4721081a7bee84d728ec493904e939',
+    callbackURL: "https://721b-42-114-248-121.ngrok-free.app/auth/facebook/callback",
+    profileFields: ['id', 'displayName', 'photos', 'email']
+},
+  function(accessToken, refreshToken, profile, cb) {
+    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    //   return cb(err, user);
+    // });
+    console.log(profile)
+    return cb(null, profile)
+  }
+));
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
+  app.get('/getProfileFb', (req, res, next)=>{
+    res.json(req.user)
+  })
+//login facebook
+
+//loggin google
+
+//loggin google
 
 // XMLHttpRequest, fetch, axios, ajax ...
 

@@ -6,10 +6,11 @@ const Example = new Schema(
     {
         exName: { type: String, require: true },
         time: { type: String },
+        videoId: { type: String }
     },
     {
         collection: 'example',
-        timestamps: true,
+        timestamps: false,
     },
 );
 

@@ -6,12 +6,12 @@
         action='/learning/{{learning._id}}?_method=PUT'
     >
         <div class='form-group'>
-            <label for='learning'>Tên khóa học</label>
+            <label for='nameCourse'>Tên khóa học</label>
             <input
                 class='form-control'
                 value='{{learning.nameCourse}}'
-                id='learning'
-                name='learning'
+                id='nameCourse'
+                name='nameCourse'
             />
         </div>
         {{#each learning.unitId}}

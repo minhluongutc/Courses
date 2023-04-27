@@ -102,7 +102,7 @@ button:focus {
               <h1 id="exampleName" style="color: #fff; font-size: 28px;">Giới thiệu khóa học</h1>
             </div>
               <h1 style="color: #fff; font-size: 18px;">Comments</h1>
-              <ul id="comments-list" style="color: #fff"></ul>
+              <ul id="comments-list" style="color: #fff; list-style: none;"></ul>
               <form  id="comment-form"  style="display: grid;">
                 <input type="text" name="accountId" value="{{loggedInUser.username}}" style="display: none;">
                 <input type="text" name="exampleId" id="exampleId" style="display: none;">
@@ -135,15 +135,7 @@ button:focus {
   const commentForm = document.getElementById('comment-form');
 
   // Lấy danh sách bình luận và hiển thị trên trang
-  fetch('http://localhost:3000/comment')
-    .then(response => response.json())
-    .then(comments => {
-      comments.forEach(comment => {
-        const li = document.createElement('li');
-        li.innerText = `${comment.accountId}: ${comment.content}`;
-        commentsList.appendChild(li);
-      });
-    });
+  
   // Thêm bình luận mới khi người dùng nhấn submit
 commentForm.addEventListener('submit', event => {
   event.preventDefault();
@@ -179,19 +171,6 @@ commentForm.addEventListener('submit', event => {
   const $ = document.querySelector.bind(document)
   const $$ = document.querySelectorAll.bind(document)
 
-  const loadPage = (example) => {
-    const preData = example.split(',')
-    const length = preData.length
-    const _id =preData[length-4].split(`'`)[0]
-    console.log(_id)
-    const commentForm = document.getElementById('comment-form');
-    const exampleId = document.getElementById('exampleId');
-    commentForm.removeChild(exampleId);
-    commentForm.innerHTML = `
-                        <input type="text" name="exampleId" id="exampleId" value="${_id}">
-    `
-  }
-
   const supperClick = (example) => {
     const preData = example.split(',')
     const length = preData.length
@@ -199,12 +178,10 @@ commentForm.addEventListener('submit', event => {
     const exName =preData[length-3].split(`'`)[1]
     const exampleId =preData[length-4].split(`'`)[0].substring(23, 47)
     console.log(exampleId)
-    //const exampleId = example._id
 
     const main = document.getElementById('main');
     const view = document.getElementById('supper-view');
-
-
+    
     main.removeChild(view);
     main.innerHTML = `<iframe
                     id = "supper-view"
@@ -217,10 +194,22 @@ commentForm.addEventListener('submit', event => {
                 ></iframe>
                 <h1 id="exampleName" style="color: #fff; font-size: 28px;">${exName}</h1>
                 `
+    fetch(`http://localhost:3000/comment?exampleId=${exampleId}`)
+      .then(response => response.json())
+      .then(comments => {
+        const commentsList = document.getElementById('comments-list');
+        commentsList.innerHTML = ''; // xóa các phần tử li cũ
 
+        comments.forEach(comment => {
+          const li = document.createElement('li');
+          li.innerText = `${comment.accountId}: ${comment.content}`;
+          commentsList.appendChild(li); // thêm các phần tử li mới
+        });
+      });
+
+        
     document.getElementById("exampleId").value = exampleId;
   }
-
 
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");
