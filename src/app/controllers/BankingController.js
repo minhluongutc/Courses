@@ -6,7 +6,7 @@ const { render } = require('node-sass');
 
 class BankingController {
     showLookUp(req, res) {
-        res.render('banking/lookup',  { loggedInUser: req.user });
+        res.render('banking/lookup', { loggedInUser: req.user });
     }
 
     async lookup(req, res) {

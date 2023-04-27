@@ -20,9 +20,9 @@ const paginate = require('express-paginate');
 
 app.use(paginate.middleware(3));
 
-app.use(function(req, res, next) {
-  res.locals.paginate = paginate;
-  next();
+app.use(function (req, res, next) {
+    res.locals.paginate = paginate;
+    next();
 });
 
 app.use(cors());

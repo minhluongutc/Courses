@@ -16,20 +16,20 @@ class AuthController {
     async registerUser(req, res) {
         res.render('register');
         try {
-          const salt = await bcrypt.genSalt(10);
-          const hashed = await bcrypt.hash(req.body.password, salt);
+            const salt = await bcrypt.genSalt(10);
+            const hashed = await bcrypt.hash(req.body.password, salt);
 
-          //Create new user
-          const newUser = await new Account({
-            username: req.body.username,
-            password: hashed,
-          });
+            //Create new user
+            const newUser = await new Account({
+                username: req.body.username,
+                password: hashed,
+            });
 
-          //Save to DB
-          const user = await newUser.save();
-          res.redirect('/auth/login')
+            //Save to DB
+            const user = await newUser.save();
+            res.redirect('/auth/login');
         } catch (err) {
-          res.status(500).json(err);
+            res.status(500).json(err);
         }
     }
 
@@ -66,7 +66,7 @@ class AuthController {
     async loginUser(req, res) {
         try {
             const user = await Account.findOne({ username: req.body.username });
-            
+
             if (!user) {
                 const error = 'Wrong username!';
                 return res.redirect(`/auth/login?error=${error}`);
@@ -109,7 +109,7 @@ class AuthController {
 
             //res.cookie('loggedInUser', loggedInUser, { maxAge:   900000, httpOnly: true });
             loggedInUser = { username: req.body.username, role: user.role };
-            console.log(loggedInUser.role)
+            console.log(loggedInUser.role);
             res.render('home', { loggedInUser: loggedInUser });
         } catch (error) {
             console.log(error);

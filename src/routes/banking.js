@@ -7,7 +7,11 @@ const bankingController = require('../app/controllers/BankingController');
 router.get('/', jwtMiddleware.verifyToken, bankingController.showLookUp);
 router.post('/lookup', bankingController.lookup);
 
-router.get('/generate', jwtMiddleware.verifyToken, bankingController.showGenerateQrCode);
+router.get(
+    '/generate',
+    jwtMiddleware.verifyToken,
+    bankingController.showGenerateQrCode,
+);
 router.post('/generate', bankingController.generateQrCode);
 
 router.post('/generateForCourse', bankingController.generateQrCodeForCourse);

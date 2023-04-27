@@ -1,0 +1,36 @@
+<div class='mt-4'>
+    <h3>Cập nhật khóa học</h3>
+    <form
+        class='mt-4'
+        method='POST'
+        action='/example/{{example._id}}?_method=PUT'
+    >
+        <div class='form-group'>
+            <label for='exname'>Tên bài học</label>
+            <input
+                class='form-control'
+                value='{{example.exName}}'
+                id='exname'
+                name='exname'
+            />
+        </div>
+        <div class='form-group'>
+            <label for='time'>Thời gian</label>
+            <textarea
+                class='form-control'
+                id='time'
+                name='time'
+            >{{example.time}}</textarea>
+        </div>
+        <div class='form-group'>
+            <label for='videoId'>videoId</label>
+            <textarea
+                class='form-control'
+                id='videoId'
+                name='videoId'
+            >{{example.videoId}}</textarea>
+        </div>
+
+        <button type='submit' class='btn btn-primary'>Lưu Lại</button>
+    </form>
+</div>

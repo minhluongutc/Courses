@@ -1,19 +1,23 @@
 const Enrollment = require('../models/Enrollment');
-const { mutipleMongooseToObject } = require('../../util/mongoose');
+const Account = require('../models/Account');
+const {
+    mongooseToObject,
+    mutipleMongooseToObject,
+} = require('../../util/mongoose');
 
 class EnrollmentController {
     show(req, res, next) {
         let enrollmentQuery = Enrollment.find({})
             .populate('accountId')
-            .populate('courseId')
-            //console.log(Enrollment.accountId)
+            .populate('courseId');
+        //console.log(Enrollment.accountId)
         if (req.query.hasOwnProperty('_sort')) {
             enrollmentQuery = enrollmentQuery.sort({
                 [req.query.column]: req.query.type,
             });
         }
 
-        Promise.all([enrollmentQuery, Enrollment.countDocumentsDeleted()])
+        Promise.all([enrollmentQuery])
             .then(([enrollment]) =>
                 res.render('enrollment/enrollment', {
                     loggedInUser: req.user,
@@ -25,25 +29,53 @@ class EnrollmentController {
 
     //[get] enrollment/create
     create(req, res, next) {
-        res.render('enrollment/create', { loggedInUser: req.user });
+        console.log(req.params.id);
+        res.render('enrollment/create', {
+            loggedInUser: req.user,
+            id: req.params.id,
+        });
     }
 
     //[post] enrollment/store
     store(req, res, next) {
         const enrollment = new Enrollment(req.body);
-        enrollment.save()
+        enrollment
+            .save()
             .then(() => res.redirect(`/enrollment`))
-            .catch((error) => {
-                console.error(error);
-                next(error);
-            });
+            .catch((error) => {});
+    }
+
+    // [get] /enrollment/:id/edit
+    edit(req, res, next) {
+        Enrollment.findById(req.params.id)
+            //console.log(enrollment)
+            .then((enrollment) =>
+                res.render('enrollment/edit', {
+                    loggedInUser: req.user,
+                    enrollment: mongooseToObject(enrollment),
+                }),
+            )
+            .catch(next);
+    }
+
+    // [PUT] /enrollment/:id
+    update(req, res, next) {
+        Enrollment.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/enrollment'))
+            .catch(next);
+    }
+
+    async delete(req, res, next) {
+        Enrollment.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
     }
 
     search(req, res, next) {
         let regex = new RegExp(req.query.username, 'i');
         let accountQuery = Enrollment.find({ username: { $regex: regex } })
-        .populate('accountId')
-        .populate('courseId')
+            .populate('accountId')
+            .populate('courseId');
 
         if (req.query.hasOwnProperty('_sort')) {
             accountQuery = accountQuery.sort({
@@ -55,7 +87,6 @@ class EnrollmentController {
             .then(([enrollment, deletedCount]) =>
                 res.render('enrollment', {
                     loggedInUser: req.user,
-                    deletedCount,
                     accounts: mutipleMongooseToObject(enrollment),
                 }),
             )

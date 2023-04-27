@@ -24,9 +24,5 @@ const Enrollment = new Schema(
     },
 );
 
-Enrollment.plugin(mongooseDelete, {
-    deleteAt: true,
-    overrideMethods: 'all',
-});
 
 module.exports = mongoose.model('Enrollment', Enrollment);

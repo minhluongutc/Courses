@@ -3,7 +3,6 @@ const slug = require('mongoose-slug-generator');
 const mongooseDelete = require('mongoose-delete');
 const paginate = require('mongoose-paginate-v2');
 
-
 const Schema = mongoose.Schema;
 
 const Course = new Schema(

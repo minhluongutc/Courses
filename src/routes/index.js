@@ -8,6 +8,7 @@ const userRouter = require('./user');
 const bankingRouter = require('./banking');
 const commentRouter = require('./comment');
 const enrollmentRouter = require('./enrollment');
+const exampleRouter = require('./example')
 
 function route(app) {
     app.use('/learning', learningRouter);
@@ -16,6 +17,7 @@ function route(app) {
     app.use('/banking', bankingRouter);
     app.use('/home', homeRouter);
     app.use('/auth', authRouter);
+    app.use('/example', exampleRouter);
     app.use('/me', meRouter);
     app.use('/courses', coursesRouter);
     app.use('/user', userRouter);

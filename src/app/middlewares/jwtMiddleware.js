@@ -8,7 +8,7 @@ class JwtMiddleware {
             const accessToken = req.cookies.refreshToken;
             if (accessToken) {
                 const payload = jwt.decode(accessToken);
-                const user = await Account.findById( payload.id );
+                const user = await Account.findById(payload.id);
                 req.user = user;
                 //console.log(user._id)
                 next();
@@ -26,9 +26,9 @@ class JwtMiddleware {
             const accessToken = req.cookies.refreshToken;
             if (accessToken) {
                 const payload = jwt.decode(accessToken);
-                const user = await Account.findById( payload.id );
+                const user = await Account.findById(payload.id);
                 req.user = user;
-                if(user.role == 'admin') {
+                if (user.role == 'admin') {
                     next();
                 } else {
                     res.status(401).json('You are not authenticated');

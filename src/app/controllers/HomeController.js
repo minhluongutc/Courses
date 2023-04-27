@@ -4,9 +4,7 @@ const { use } = require('../../routes/home');
 const paginate = require('express-paginate');
 const mongoose = require('mongoose');
 
-
-
-const perPage = 3;
+const perPage = 6;
 
 class HomeController {
     // [GET] / home
@@ -14,17 +12,17 @@ class HomeController {
         //const perPage = 10;
         const currentPage = req.query.page || 1;
         Course.paginate({}, { page: currentPage, limit: perPage })
-          .then((result) => {
-            const courses = result.docs;
-            const pageCount = result.totalPages;
-            res.render('home', {
-              courses: mutipleMongooseToObject(courses),
-              currentPage: currentPage,
-              pageCount: pageCount,
-              loggedInUser: req.user,
-            });
-          })
-          .catch((error) => next(error));
+            .then((result) => {
+                const courses = result.docs;
+                const pageCount = result.totalPages;
+                res.render('home', {
+                    courses: mutipleMongooseToObject(courses),
+                    currentPage: currentPage,
+                    pageCount: pageCount,
+                    loggedInUser: req.user,
+                });
+            })
+            .catch((error) => next(error));
 
         // Course.find({})
         //     .then((courses) => {
