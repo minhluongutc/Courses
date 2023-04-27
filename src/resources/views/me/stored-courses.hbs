@@ -6,6 +6,8 @@
 >
     <div>
         <h3>Khóa học của tôi</h3>
+        <a href='/courses/create'>Đăng khóa học</a>
+        <br>
         <a href='/me/trash/courses'>Thùng rác ({{deletedCount}})</a>
     </div>
 
@@ -54,12 +56,12 @@
                     {{{sortable 'level' _sort}}}
                 </th>
                 <th scope='col' colspan='2'>
-                    Thời gian tạo
-                    {{{sortable 'createdAt' _sort}}}
-                </th>
-                <th scope='col' colspan='2'>
                     Giá
                     {{{sortable 'price' _sort}}}
+                </th>
+                <th scope='col' colspan='2'>
+                    learningId
+                    {{{sortable 'learningId' _sort}}}
                 </th>
             </tr>
         </thead>
@@ -81,9 +83,9 @@
                     <td>{{this._id}}</td>
                     <td>{{this.name}}</td>
                     <td>{{this.level}}</td>
-                    <td>{{this.createdAt}}</td>
-                    <td></td>
                     <td>{{this.price}}</td>
+                    <td></td>
+                    <td>{{this.learningId}}</td>
                     <td>
                         <a
                             href='/courses/{{this._id}}/edit'

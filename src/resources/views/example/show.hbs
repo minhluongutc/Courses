@@ -40,17 +40,17 @@
         <div class='input-group col-lg-4'>
             <form
                 method='get'
-                action='http://localhost:3000/example/search/{{username}}'
+                action='http://localhost:3000/example/search/{{exName}}'
                 id='search-form'
                 class='d-flex'
             >
                 <input
-                    id='username'
-                    name='username'
+                    id='exName'
+                    name='exName'
                     type='text'
                     class='form-control'
-                    placeholder='Search username'
-                    aria-label='Search username'
+                    placeholder='Search exName'
+                    aria-label='Search exName'
                     aria-describedby='basic-addon2'
                 />
                 <div class='input-group-append'>
@@ -135,7 +135,7 @@
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <h5 class='modal-title'>Xóa đăng ký này?</h5>
+                <h5 class='modal-title'>Xóa bài học này?</h5>
                 <button
                     type='button'
                     class='close'
@@ -146,7 +146,7 @@
                 </button>
             </div>
             <div class='modal-body'>
-                <p>Bạn muốn xóa khóa học này?</p>
+                <p>Bạn muốn xóa bài học này?</p>
             </div>
             <div class='modal-footer'>
                 <button

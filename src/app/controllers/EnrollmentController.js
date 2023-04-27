@@ -1,5 +1,6 @@
 const Enrollment = require('../models/Enrollment');
 const Account = require('../models/Account');
+const Course = require('../models/Course');
 const {
     mongooseToObject,
     mutipleMongooseToObject,
@@ -9,7 +10,7 @@ class EnrollmentController {
     show(req, res, next) {
         let enrollmentQuery = Enrollment.find({})
             .populate('accountId')
-            .populate('courseId');
+            .populate('courseId')
         //console.log(Enrollment.accountId)
         if (req.query.hasOwnProperty('_sort')) {
             enrollmentQuery = enrollmentQuery.sort({

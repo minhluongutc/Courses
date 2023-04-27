@@ -5,8 +5,8 @@
     action='/courses/handle-form-actions'
 >
     <div>
-        <h3>Danh sách đăng kí khóa học</h3>
-        <a href="/user">Thêm đăng kí</a>
+        <h3>Danh sách các Khóa học</h3>
+        <a href='/learning/create'>Thêm khóa học mới</a>
     </div>
 
     <div class='mt-4 d-flex align-items-center'>
@@ -40,7 +40,7 @@
         <div class='input-group col-lg-4'>
             <form
                 method='get'
-                action='http://localhost:3000/enrollment/search/{{username}}'
+                action='http://localhost:3000/learning/search/{{username}}'
                 id='search-form'
                 class='d-flex'
             >
@@ -68,22 +68,22 @@
             <tr>
                 <th scope='col' colspan='2'>#</th>
                 <th scope='col'>
-                    accountId
-                    {{{sortable 'accountId' _sort}}}
+                    learningId
+                    {{{sortable '_id' _sort}}}
                 </th>
                 <th scope='col'>
-                    Khóa học đăng kí
-                    {{{sortable 'courseId' _sort}}}
+                    Tên khóa học
+                    {{{sortable 'nameCourse' _sort}}}
                 </th>
-                <th scope='col' colspan='2'>
-                    Thời gian đăng kí
-                    {{{sortable 'createdAt' _sort}}}
+                <th scope='col'>
+                    unitId
+                    {{{sortable 'unitId' _sort}}}
                 </th>
             </tr>
         </thead>
 
         <tbody>
-            {{#each courses}}
+            {{#each learning}}
                 <tr>
                     <td>
                         <div class='form-check'>
@@ -96,14 +96,12 @@
                         </div>
                     </td>
                     <th scope='row'>{{sum @index 1}}</th>
-                    <td>{{this.accountId.username}}</td>
-                    <td>{{this.courseId.name}}</td>
-                    <td>{{this.createdAt}}</td>
-                    <td></td>
-                    <td>{{this.price}}</td>
+                    <td>{{this._id}}</td>
+                    <td>{{this.nameCourse}}</td>
+                    <td>{{this.unitId}}</td>
                     <td>
                         <a
-                            href='/enrollment/{{this._id}}/edit'
+                            href='/learning/{{this._id}}/edit'
                             class='btn btn-link'
                         >Sửa</a>
                         <a
@@ -132,7 +130,7 @@
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <h5 class='modal-title'>Xóa đăng ký này?</h5>
+                <h5 class='modal-title'>Xóa chương này này?</h5>
                 <button
                     type='button'
                     class='close'
@@ -143,7 +141,7 @@
                 </button>
             </div>
             <div class='modal-body'>
-                <p>Bạn muốn xóa khóa học này?</p>
+                <p>Bạn muốn xóa chương học này?</p>
             </div>
             <div class='modal-footer'>
                 <button
@@ -180,7 +178,7 @@
             courseId = button.data('id')
         })
         btnDeleteCourse.onclick = function () {
-            deleteForm.action = '/enrollment/' + courseId + '?_method=DELETE'
+            deleteForm.action = '/learning/' + courseId + '?_method=DELETE'
             deleteForm.submit()
         }
         // Checkbox all changed

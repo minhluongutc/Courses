@@ -68,5 +68,26 @@ class ExampleController {
             .then(() => res.redirect('back'))
             .catch(next);
     }
+
+    search(req, res, next) {
+        let regex = new RegExp(req.query.username, 'i');
+        let accountQuery = Example.find({ username: { $regex: regex } });
+
+        if (req.query.hasOwnProperty('_sort')) {
+            accountQuery = accountQuery.sort({
+                [req.query.column]: req.query.type,
+            });
+        }
+
+        Promise.all([accountQuery])
+            .then(([example, deletedCount]) =>
+                res.render('example/show', {
+                    loggedInUser: req.user,
+                    deletedCount,
+                    example: mutipleMongooseToObject(example),
+                }),
+            )
+            .catch(next);
+    }
 }
 module.exports = new ExampleController();
