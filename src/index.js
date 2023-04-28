@@ -7,9 +7,11 @@ const methodOverride = require('method-override');
 const handlebars = require('express-handlebars');
 var session = require('express-session')
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
-
+const Token = require('./app/models/Token');
 const route = require('./routes');
 const db = require('./config/db');
+const MongoClient = require('mongodb').MongoClient;
+const jwtMiddleware = require('./app/middlewares/jwtMiddleware');
 
 // Connect to DB
 db.connect();
@@ -67,37 +69,60 @@ passport.deserializeUser(function(user, done) {
 })
 
 app.use(passport.initialize())
+const url = 'mongodb://127.0.0.1:27017/f8_education_dev';
 
 passport.use(new FacebookStrategy({
     clientID: '961743685186441',
     clientSecret: '1f4721081a7bee84d728ec493904e939',
-    callbackURL: "https://721b-42-114-248-121.ngrok-free.app/auth/facebook/callback",
+    callbackURL: "https://8091-42-114-248-121.ngrok-free.app/auth/facebook/callback",
     profileFields: ['id', 'displayName', 'photos', 'email']
 },
   function(accessToken, refreshToken, profile, cb) {
-    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    // });
-    console.log(profile)
+    var user = profile
+    var newToken = { accessToken: accessToken, user: user }
+
+    // Lưu thông tin đăng nhập vào MongoDB
+    MongoClient.connect(url, function(err, db) {
+      if (err) return cb(err);
+      var dbo = db.db("f8_education_dev")
+      dbo.collection("tokens").insertOne(newToken, function(err, res) {
+        if (err) return cb(err);
+        console.log("Token saved to database")
+        db.close()
+      })
+    })
+
     return cb(null, profile)
   }
 ));
 
+
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  
+  app.get('/auth/facebook/callback', jwtMiddleware.verifyToken, passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-
     // Successful authentication, redirect home.
-    res.redirect('/');
+    jwt.sign({ id: req.user._id }, 'luong', { expiresIn: '30m' }, (err, refreshToken) => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+      } else {
+        res.cookie('accessToken', refreshToken, {
+          httpOnly: true,
+          maxAge: 30 * 60 * 1000 // Thời gian sống của access token là 30 phút
+        });
+        //res.redirect('/');
+      }
+    });
   });
-
 
   app.get('/getProfileFb', (req, res, next)=>{
     res.json(req.user)
   })
+
+  
 //login facebook
 
 //loggin google

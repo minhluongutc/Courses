@@ -113,11 +113,12 @@ class AuthController {
             console.log(loggedInUser.role);
             Course.find({})
             .then((courses) => {
-                //courses = courses.map(course => course.toObject())
+                courses = courses.map(course => course.toObject())
                 res.render('home', {
                     loggedInUser: loggedInUser,
                     courses: mutipleMongooseToObject(courses),
                 });
+                //res.status(200).json(courses)
             })
             .catch((error) => next(error));
             // res.render('home', { 
