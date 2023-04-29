@@ -20,8 +20,8 @@ class BankingController {
                 method: 'post',
                 url: 'https://api.vietqr.io/v2/lookup',
                 headers: {
-                    'x-client-id': '2ab01b4f-7b27-48df-8679-e1de5fbbb440',
-                    'x-api-key': 'cc035823-32a6-4dc5-ae8f-e1e16767e74b',
+                    'x-client-id': '9c5d5f3c-a1d2-417e-89db-08a3ef0ff9f4',
+                    'x-api-key': '87e17335-3228-40f5-bce4-257bb9ccc38f',
                     'Content-Type': 'application/json',
                 },
                 data: data,
